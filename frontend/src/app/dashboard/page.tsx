@@ -7,7 +7,6 @@ import {
   Code, 
   Lightbulb, 
   CheckCircle2, 
-  AlertCircle, 
   ArrowUpRight,
   User,
   Star,
@@ -141,10 +140,10 @@ export default function Dashboard() {
             <div className="flex-1 space-y-6">
               <div>
                 <h2 className="text-2xl font-bold">Strong Potential</h2>
-                <p className="text-muted-foreground mt-1 leading-relaxed">
-                  Your profile is better than 82% of developers in your target role. 
-                  Focus on improving "Testing" and "Deployment" scores to reach A-tier.
-                </p>
+                <p className="text-sm text-muted-foreground mt-1 leading-relaxed">
+                Your profile is better than 82% of developers in your target role. 
+                Focus on improving &quot;Testing&quot; and &quot;Deployment&quot; scores to reach A-tier.
+              </p>
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div className="bg-secondary/30 rounded-2xl p-4 border border-border/50">
@@ -259,8 +258,8 @@ export default function Dashboard() {
                 </div>
               </div>
               <p className="text-sm text-muted-foreground leading-relaxed mb-6 italic">
-                "Strong ML project shows production thinking. However, lack of unit testing across the portfolio 
-                is a red flag for senior roles. Would reach out for an initial screening."
+                &quot;Strong ML project shows production thinking. However, lack of unit testing across the portfolio 
+                is a red flag for senior roles. Would reach out for an initial screening.&quot;
               </p>
               <div className="bg-secondary/30 rounded-2xl p-4 border border-border/50">
                 <div className="text-xs font-bold text-primary flex items-center gap-2 mb-2">
@@ -283,7 +282,7 @@ export default function Dashboard() {
                 Next Recommended Build
               </h4>
               <p className="text-sm text-muted-foreground mb-4 font-medium">
-                You're missing a <span className="text-white">Streaming Systems</span> project.
+                You&apos;re missing a <span className="text-white">Streaming Systems</span> project.
               </p>
               <div className="space-y-3">
                 <div className="text-xs font-bold text-primary uppercase tracking-widest">Project Concept</div>

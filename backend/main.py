@@ -2,7 +2,7 @@ from fastapi import FastAPI, Depends, HTTPException, BackgroundTasks
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from typing import List
-from . import models, schemas, database, auth
+from . import models, schemas, database, auth, worker
 from .services.github_service import GitHubService
 from .services.ai_service import AIService
 
@@ -36,8 +36,8 @@ async def analyze_profile(
         db.commit()
         db.refresh(user)
     
-    # Trigger background analysis (Logic to be implemented in worker.py)
-    # background_tasks.add_task(run_analysis, user.id, username, db)
+    # Trigger background analysis
+    worker.analyze_profile_task.delay(str(user.id), username, "placeholder_token") # Token should come from OAuth
     
     return user
 

@@ -93,16 +93,53 @@ class AIService:
                 "raw_content": message.content[0].text
             }
 
-    async def get_improvement_suggestions(self, analysis: Dict[str, Any]) -> List[Dict[str, Any]]:
+    async def classify_complexity(self, repo_summary: str) -> str:
         """
-        Generates improvement suggestions based on the analysis.
+        Quickly classifies repo complexity using Claude Haiku.
         """
-        # Implementation...
-        return []
+        system_prompt = "You are a senior dev. Classify repo complexity as beginner, intermediate, or advanced."
+        user_prompt = f"Analyze this repo summary and return ONLY the tier: {repo_summary}"
+
+        message = self.anthropic.messages.create(
+            model="claude-3-haiku-20240307",
+            max_tokens=10,
+            temperature=0,
+            system=system_prompt,
+            messages=[{"role": "user", "content": user_prompt}]
+        )
+        return message.content[0].text.strip().lower()
 
     async def simulate_recruiter(self, profile_summary: Dict[str, Any]) -> Dict[str, Any]:
         """
-        Simulates a recruiter's response to the profile.
+        Simulates a recruiter's response to the profile using Claude Sonnet.
         """
-        # Implementation...
-        return {}
+        system_prompt = """
+        You are a Senior Technical Recruiter at a top-tier tech company. 
+        You see hundreds of GitHub profiles daily. Provide a blunt, honest assessment.
+        """
+        
+        user_prompt = f"""
+        Profile Summary: {json.dumps(profile_summary, indent=2)}
+        
+        Return JSON matching this schema:
+        {{
+          "verdict": "Strong Hire | Shortlist | Reject",
+          "confidence": "High | Medium | Low",
+          "reasoning": "2 sentences max",
+          "biggest_fix": "Single most impactful action",
+          "would_reach_out": true|false
+        }}
+        """
+
+        message = self.anthropic.messages.create(
+            model="claude-3-sonnet-20240229",
+            max_tokens=500,
+            temperature=0.7,
+            system=system_prompt,
+            messages=[{"role": "user", "content": user_prompt}]
+        )
+        
+        try:
+            return json.loads(message.content[0].text)
+        except:
+            return {"error": "Failed to parse simulation"}
