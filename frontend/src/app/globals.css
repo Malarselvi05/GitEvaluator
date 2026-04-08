@@ -1,0 +1,86 @@
+@import "tailwindcss";
+
+:root {
+  --background: #0a0a0b;
+  --foreground: #f8fafc;
+  --card: #141417;
+  --card-foreground: #f8fafc;
+  --popover: #0a0a0b;
+  --popover-foreground: #f8fafc;
+  --primary: #3b82f6;
+  --primary-foreground: #ffffff;
+  --secondary: #1e293b;
+  --secondary-foreground: #f8fafc;
+  --muted: #1e293b;
+  --muted-foreground: #94a3b8;
+  --accent: #3b82f6;
+  --accent-foreground: #f8fafc;
+  --destructive: #ef4444;
+  --destructive-foreground: #f8fafc;
+  --border: #27272a;
+  --input: #27272a;
+  --ring: #3b82f6;
+  --radius: 0.75rem;
+}
+
+@theme {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-feature-settings: "rlig" 1, "calt" 1;
+  background-image: 
+    radial-gradient(at 0% 0%, hsla(217,100%,50%,0.05) 0px, transparent 50%),
+    radial-gradient(at 50% 0%, hsla(250,100%,50%,0.05) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, hsla(217,100%,50%,0.05) 0px, transparent 50%);
+  background-attachment: fixed;
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-card/60 backdrop-blur-md border border-border/50;
+  }
+  
+  .glass-hover {
+    @apply hover:bg-card/80 hover:border-primary/30 transition-all duration-300;
+  }
+  
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-indigo-500;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+::-webkit-scrollbar-thumb {
+  background: #27272a;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #3f3f46;
+}
